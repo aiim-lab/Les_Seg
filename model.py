@@ -19,7 +19,7 @@ from keras.applications import resnet
 
 img_rows = 256
 img_cols = 256
-img_depth = 36
+img_depth = 32
 smooth = 1.
 
 def unet(input_size, loss_function, opt):
@@ -93,16 +93,3 @@ def unet(input_size, loss_function, opt):
     model.compile(optimizer= opt, loss=loss_function , metrics=[dsc,tp,tn])
 
     return model
-
-
-
-
-
-
-
-
-
-
-
-
-

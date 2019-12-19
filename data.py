@@ -69,33 +69,33 @@ color_dict= np.array([Sky,Building, Pole, Road, Pavement, Tree, SignSymbol, Fenc
 
 def trainGenerator(batch_size,train_path,image_folder,mask_folder,aug_dict,image_color_mode = "grayscale",
                     mask_color_mode = "grayscale",image_save_prefix  = "image",mask_save_prefix  = "mask",
-                    flag_multi_class = True,num_class = 2,save_to_dir = None,target_size = (36,256,256),seed = 1):
+                    flag_multi_class = True,num_class = 2,save_to_dir = None,target_size = (32,256,256),seed = 1):
 
     image_datagen = ImageDataGenerator(**aug_dict)
     mask_datagen = ImageDataGenerator(**aug_dict)
     image_generator = image_datagen.flow_from_directory(
-    'C:/Users/MANPREET .LAPTOP-U55FJOMD/Desktop/covera_health/data/train',
-    class_mode=None,
-    target_size=target_size,
-    color_mode='grayscale',
-    batch_size=batch_size,
-    shuffle=True,
-    seed=seed)
+        os.path.join(os.getcwd(),'data','data','data','data','train'),
+        class_mode=None,
+        target_size=target_size,
+        color_mode='grayscale',
+        batch_size=batch_size,
+        shuffle=True,
+        seed=seed)
 
     mask_generator = mask_datagen.flow_from_directory(
-    'C:/Users/MANPREET .LAPTOP-U55FJOMD/Desktop/covera_health/data/train',
-    class_mode=None,
-    target_size=target_size,
-    shuffle=True,
-    color_mode='grayscale',
-    batch_size=batch_size,
-    seed=seed)
+        os.path.join(os.getcwd(),'data','data','data','data','train'),
+        class_mode=None,
+        target_size=target_size,
+        shuffle=True,
+        color_mode='grayscale',
+        batch_size=batch_size,
+        seed=seed)
 
     #combine generators into one which yields image and masks
     train_generator= zip(image_generator, mask_generator)
     return train_generator
 
-def testGenerator(test_path,num_image = 4,target_size = (36,256,256),flag_multi_class = False,as_gray = True):
+def testGenerator(test_path,num_image = 4,target_size = (32,256,256),flag_multi_class = False,as_gray = True):
     for i in range(num_image):
         img = io.imread(os.path.join(test_path,"%d.npy"%i),as_gray = as_gray)
         img = img/255
